@@ -91,7 +91,7 @@ Starlight content is full of Expressive Code fence meta; Blume understands some 
 ## Plugins — map, don't drop
 
 - `starlight-openapi` → an `openapi({ sources })` entry in Blume's `reference` list, imported from `blume/reference` (delete any generated pages; add the `navigation.tabs` entry).
-- `starlight-blog` → `type: blog` pages (RSS at `/blog/rss.xml`). Blume generates **no** blog index, tag, or author pages: write a `blog/index.mdx` whose `CardGroup` links each post (see `docs/advanced/blog.mdx` in the installed package), and report the tag and author pages as dropped.
+- `starlight-blog` → `type: blog` pages, keeping their `tags` (RSS at `/blog/rss.xml`). Blume generates the `/blog` index and a page per tag at `/blog/tags/<tag>` (see `docs/advanced/blog.mdx` in the installed package), but no author pages: report those as dropped.
 - `starlight-versions` → Blume's native versioning, not a `navigation.selectors` dropdown: each archived version's content goes in a top-level folder under `content.root` named for its id, listed in `versions.archived` (newest first), and Blume adds the switcher, the old-version notice, and version-scoped search. Ids must start with a letter (`1.0/` → `v1.0/`, with `redirects` from the old URLs), and a version-shaped folder left out of `versions.archived` only warns (`BLUME_VERSIONS_UNCONFIGURED_VERSION`) and publishes as current content. Full reference: `docs/content/versioning.mdx` in the installed package.
 - `starlight-image-zoom` → delete (Blume zooms content images by default).
 - `starlight-links-validator` → delete (`blume validate` covers it).

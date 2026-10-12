@@ -54,7 +54,7 @@ Docusaurus `versioned_docs/version-X/` + `versions.json` (+ `versioned_sidebars/
 
 ## Blog
 
-A Docusaurus `blog/` → Blume `type: blog` pages. **Dates come from filenames/folders** (`2024-01-31-foo.md`) — extract each into `date` frontmatter and strip the date from the filename (the old dated URLs `/blog/2024/01/31/foo` need `redirects`). Strip `<!-- truncate -->` / `{/* truncate */}` markers. `authors.yml` refs → inline author objects in each post's `authors` frontmatter. RSS stays at `/blog/rss.xml` on both sides. Blume generates **no** blog index, tag, author, or archive pages: write a `blog/index.mdx` whose `CardGroup` links each post (see `docs/advanced/blog.mdx` in the installed package), and report the tag, author, and archive pages as dropped.
+A Docusaurus `blog/` → Blume `type: blog` pages. **Dates come from filenames/folders** (`2024-01-31-foo.md`) — extract each into `date` frontmatter and strip the date from the filename (the old dated URLs `/blog/2024/01/31/foo` need `redirects`). Strip `<!-- truncate -->` / `{/* truncate */}` markers. `authors.yml` refs → inline author objects in each post's `authors` frontmatter. RSS stays at `/blog/rss.xml` on both sides. Keep each post's `tags`: Blume generates the `/blog` index, grouped by year, and a page per tag at `/blog/tags/<tag>`, the URL shape Docusaurus uses (see `docs/advanced/blog.mdx` in the installed package). It generates no author or archive pages: redirect `/blog/archive` and the list of tags at `/blog/tags` to `/blog`, and report the author pages as dropped.
 
 ## Content & components
 
@@ -78,7 +78,7 @@ A Docusaurus `blog/` → Blume `type: blog` pages. **Dates come from filenames/f
 | `unlisted` | `hidden: true` + `noindex: true` |
 | `last_update.date` | `lastModified` |
 | `draft` | `draft` |
-| `tags` | `search.tags` (or drop if only used for the blog tag index) |
+| `tags` | `tags` on a blog post (its tag pages), each a plain label: an object tag (`{ label, permalink }`) or a `tags.yml` key becomes its `label`; `search.tags` on a doc page |
 | `image` | `seo.image` |
 | `keywords` | drop → use `seo` |
 | `sidebar_class_name` / `sidebar_custom_props` / `pagination_next` / `pagination_prev` / `pagination_label` / `hide_title` / `hide_table_of_contents` / `toc_min_heading_level` / `toc_max_heading_level` / `displayed_sidebar` / `custom_edit_url` | drop (report) |
@@ -95,4 +95,4 @@ Remove `@docusaurus/*` and Algolia deps; delete `docusaurus.config.*`, `sidebars
 
 ## Dropped — report these
 
-Custom/swizzled theme components (layout slots or `blume eject`), the footer's logo and HTML items (and any link inside its copyright), the blog's generated tag, author, and archive pages, Algolia config, `sidebar_custom_props` and the other dropped frontmatter keys, `createRedirects` functions (→ host rules), React pages under `src/pages/`, `<TOCInline>`, per-category `className`/`customProps`, and any `@theme/*` component with no Blume equivalent.
+Custom/swizzled theme components (layout slots or `blume eject`), the footer's logo and HTML items (and any link inside its copyright), the blog's author and archive pages, Algolia config, `sidebar_custom_props` and the other dropped frontmatter keys, `createRedirects` functions (→ host rules), React pages under `src/pages/`, `<TOCInline>`, per-category `className`/`customProps`, and any `@theme/*` component with no Blume equivalent.

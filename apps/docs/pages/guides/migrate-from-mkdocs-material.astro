@@ -818,13 +818,14 @@ const prettierrc = `{
       <strong>blog</strong> posts become <a href="/docs/advanced/blog">pages
       with <code>type: blog</code></a> and a flat <code>date</code> (a nested{" "}
       <code>date.created</code> fails the build). Blume
-      generates no index, archive, or category pages, so write a{" "}
-      <code>blog/index.mdx</code>, drop <code>categories</code>, and redirect
-      dated URLs like <code>/blog/2024/01/31/hello/</code>.
+      generates the <code>/blog</code> index and a page per tag, so{" "}
+      <code>categories</code> become <code>tags</code>. Redirect dated URLs
+      like <code>/blog/2024/01/31/hello/</code>.
     </li>
     <li>
       <strong>tags</strong> becomes <code>search.tags</code>, a facet on
-      hosted search providers, with no tag index pages.
+      hosted search providers, with no tag index pages. On a blog post, move
+      them back to <code>tags</code>, which gets a page per tag.
     </li>
     <li>
       <strong>social</strong> cards are built in as{" "}
